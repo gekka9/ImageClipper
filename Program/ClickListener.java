@@ -26,9 +26,8 @@ public class ClickListener implements MouseListener{
 
   @Override
   public void mouseClicked(MouseEvent e) {
-    // TODO Auto-generated method stub
     if (e.getClickCount() >= 2){
-      JOptionPane.showMessageDialog(null, "つぶやきました。");
+      JOptionPane.showMessageDialog(null, "ダブルクリック");
    }else{
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     StringSelection selection = new StringSelection(this.URL);
@@ -39,25 +38,21 @@ public class ClickListener implements MouseListener{
 
   @Override
   public void mouseEntered(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void mouseExited(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void mousePressed(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void mouseReleased(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 

@@ -1,7 +1,6 @@
 package imageClipper;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +10,6 @@ import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
 public class ImageFileReader {
-
-  private final String URL = "/Users/otaki/Dropbox/Public/codes.txt";
   
   ImageFileReader(){
     System.out.println("read");

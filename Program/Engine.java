@@ -59,22 +59,15 @@ public class Engine {
     aWindow.setMinimumSize(new Dimension(WIDTH, 500));
     aWindow.setMaximumSize(new Dimension(WIDTH, 600));
     aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//    aWindow.setSize(WIDTH, HEIGHT);
     aWindow.pack();
     aWindow.setLocation(200,200);
-//    aWindow.setVisible(true);
-   
-//    JPanel mainPanel = new JPanel();
-//    mainPanel.setBounds(0, 0, WIDTH, HEIGHT);
-//    mainPanel.setBackground(Color.black);
-//    aWindow.add(mainPanel);
    
     
     int x = 20;
     int y=20;
     JPanel allImage = new JPanel();
     allImage.setBackground(Color.gray);
-    allImage.setPreferredSize(new Dimension(WIDTH, imageHeight));
+    allImage.setPreferredSize(new Dimension(WIDTH-100, imageHeight));
 //    allImage.setBounds(0, 0, WIDTH, HEIGHT);
     
     //aWindow.add(new JPanel());
@@ -90,7 +83,6 @@ public class Engine {
           y+=130; 
         } 
       }
-//      panel.repaint();
     }
     JScrollPane scrollpane = new JScrollPane(allImage);
     scrollpane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -98,10 +90,6 @@ public class Engine {
     
     
     aWindow.setVisible(true);
-    
-//    mainPanel.add(allImage);
-    //aWindow.add(scrollPane);
-//    aWindow.repaint();
   }
 
 }

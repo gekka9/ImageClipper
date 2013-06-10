@@ -43,10 +43,8 @@ public class ImageFactory extends Thread{
       System.out.println("add");
       }
     } catch (MalformedURLException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
@@ -62,10 +60,8 @@ public class ImageFactory extends Thread{
       image = ImageIO.read(url);
       panel = new ImagePanel(image);
     } catch (MalformedURLException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return panel;
@@ -75,7 +71,6 @@ public class ImageFactory extends Thread{
    * @param args
    */
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
 
   }
 
