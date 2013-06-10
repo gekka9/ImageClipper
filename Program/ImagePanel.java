@@ -19,6 +19,7 @@ public class ImagePanel extends JPanel{
   private BufferedImage image =null;
   
   ImagePanel(BufferedImage image){
+    super();
     AffineTransformOp ato = null;
     int width=120;
     int height = (int)(((double)width /image.getWidth()) * (double)image.getHeight());

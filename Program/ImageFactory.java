@@ -7,6 +7,11 @@ import java.util.List;
 
 import javax.imageio.ImageIO;
 
+
+/**
+ * コードを1つ受け取り、ImagePanelを生成する。
+ *
+ */
 public class ImageFactory extends Thread{
 
   private String code=null;
