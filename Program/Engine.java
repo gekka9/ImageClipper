@@ -60,7 +60,7 @@ public class Engine {
     aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     aWindow.setSize(WIDTH, HEIGHT);
     aWindow.setLocation(200,200);
-    aWindow.setVisible(true);
+//    aWindow.setVisible(true);
    
 //    JPanel mainPanel = new JPanel();
 //    mainPanel.setBounds(0, 0, WIDTH, HEIGHT);
@@ -90,7 +90,7 @@ public class Engine {
     scrollpane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     aWindow.getContentPane().add(scrollpane);
     
-    
+    aWindow.setVisible(true);
     
 //    mainPanel.add(allImage);
     //aWindow.add(scrollPane);
