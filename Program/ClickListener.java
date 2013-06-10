@@ -25,12 +25,16 @@ public class ClickListener implements MouseListener{
   }
 
   @Override
-  public void mouseClicked(MouseEvent arg0) {
+  public void mouseClicked(MouseEvent e) {
     // TODO Auto-generated method stub
+    if (e.getClickCount() >= 2){
+      JOptionPane.showMessageDialog(null, "つぶやきました。");
+   }else{
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     StringSelection selection = new StringSelection(this.URL);
     clipboard.setContents(selection, selection);
     //JOptionPane.showMessageDialog(null, "URLをクリップボードにコピーしました。");
+   }
   }
 
   @Override

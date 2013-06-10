@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JViewport;
 
 /**
  * アプリケーションの動作のためのエンジン
@@ -52,13 +51,16 @@ public class Engine {
        break;
      }
     }
+    int imageHeight = (imagePanelList.size()/4)*130;
     System.out.println("test");
     JFrame aWindow;
     aWindow = new JFrame("ImageClipper");
     //aWindow.getContentPane().add(aView);
-    aWindow.setMinimumSize(new Dimension(400, 300));
+    aWindow.setMinimumSize(new Dimension(WIDTH, 500));
+    aWindow.setMaximumSize(new Dimension(WIDTH, 600));
     aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    aWindow.setSize(WIDTH, HEIGHT);
+//    aWindow.setSize(WIDTH, HEIGHT);
+    aWindow.pack();
     aWindow.setLocation(200,200);
 //    aWindow.setVisible(true);
    
@@ -66,29 +68,34 @@ public class Engine {
 //    mainPanel.setBounds(0, 0, WIDTH, HEIGHT);
 //    mainPanel.setBackground(Color.black);
 //    aWindow.add(mainPanel);
+   
     
     int x = 20;
     int y=20;
     JPanel allImage = new JPanel();
-    allImage.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+    allImage.setBackground(Color.gray);
+    allImage.setPreferredSize(new Dimension(WIDTH, imageHeight));
 //    allImage.setBounds(0, 0, WIDTH, HEIGHT);
     
     //aWindow.add(new JPanel());
     for(ImagePanel panel:imagePanelList){
-      panel.setPreferredSize(new Dimension(120, 120));
-      allImage.add(panel);
-      //aWindow.add(panel);
-      panel.setBounds(x, y, 120, 120);
-      x+=140;
-      if(x>WIDTH-130){
-        x=20;
-        y+=130;
+      if(panel.getImage() !=null){
+        panel.setPreferredSize(new Dimension(120, 120));
+        allImage.add(panel);
+        //aWindow.add(panel);
+        panel.setBounds(x, y, 120, 120);
+        x+=140;
+        if(x>WIDTH-130){
+          x=20;
+          y+=130; 
+        } 
       }
 //      panel.repaint();
     }
     JScrollPane scrollpane = new JScrollPane(allImage);
     scrollpane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
     aWindow.getContentPane().add(scrollpane);
+    
     
     aWindow.setVisible(true);
     

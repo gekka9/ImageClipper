@@ -7,6 +7,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 public class ImageFileReader {
 
   private final String URL = "/Users/otaki/Dropbox/Public/codes.txt";
@@ -17,30 +20,27 @@ public class ImageFileReader {
   
   public List<String> readCodes(){
     ArrayList<String> list = new ArrayList<String>();
-    try {
-      //java.net.URL url = new java.net.URL(this.URL);
-      //InputStream strm = url.openStream();
-      
-      //InputStreamReader in = new InputStreamReader(strm);
-      FileReader in = new FileReader(new File(this.URL));
-      BufferedReader inb = new BufferedReader(in);
-      String line="";
-      while( ( line = inb.readLine() ) != null ){
+    //FileChooserの作成
+    JFileChooser chooser = new JFileChooser();
+    chooser.setFileFilter(new FileNameExtensionFilter("*.txt","txt"));
+    
+    //選択されたファイルの読み取り
+    if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+      System.out.print("Loading source code...");
+      try {
+        BufferedReader inb = new BufferedReader(new FileReader(chooser.getSelectedFile()));
+        String line="";
+        while( ( line = inb.readLine() ) != null ){
           list.add(line);
+        }
+        inb.close();
       }
-      inb.close();
-      in.close();
+      catch( IOException e ){
+        e.printStackTrace();
+      }
+      return list;
     }
-    catch( IOException e ){
-      e.printStackTrace();
-    }
-    //System.out.println(result);
-    /*
-    for (String line : list){
-      System.out.println(line);
-    }
-    */
-    return list;
+    return null;
   }
 
 }
