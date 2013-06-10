@@ -34,49 +34,58 @@ public class Engine {
    * @throws InterruptedException
    */
   private void execute() throws InterruptedException{
+    //ファイルを読み込んでImagePanelを作らせる
     ImageFileReader reader = new ImageFileReader();
+    System.out.print("Loading codes...");
     ArrayList<String> codeList=(ArrayList<String>) reader.readCodes();
+    System.out.println("done!");
+    System.out.print("Generating ImagePanel...");
     ArrayList<ImagePanel> imagePanelList= new ArrayList<ImagePanel>();
     for(String code:codeList){
       ImageFactory factory = new ImageFactory(code,imagePanelList);
       //imagePanelList.add(factory.createImagePanel());
       factory.start();
     }
+    
+    //ImagePanelの生成スレッドがすべて終了したら先に進む
     int length=0;
     while(true){
      Thread.sleep(100);
      length=imagePanelList.size();
      if(length==codeList.size()){
-       System.out.println("break");
        break;
      }
     }
+
+    System.out.println("Done!");
+    System.out.print("Showing Images...");
+    //画像表示に必要な高さを得る
     int imageHeight = (imagePanelList.size()/4)*130;
-    System.out.println("test");
-    JFrame aWindow;
-    aWindow = new JFrame("ImageClipper");
-    //aWindow.getContentPane().add(aView);
-    aWindow.setMinimumSize(new Dimension(WIDTH, 500));
-    aWindow.setMaximumSize(new Dimension(WIDTH, 600));
-    aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    aWindow.pack();
-    aWindow.setLocation(200,200);
-   
     
-    int x = 20;
-    int y=20;
+    //メインフレームの作成
+    JFrame mainFrame;
+    mainFrame = new JFrame("ImageClipper");
+    mainFrame.setMinimumSize(new Dimension(WIDTH, 500));
+    mainFrame.setMaximumSize(new Dimension(WIDTH, 600));
+    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mainFrame.pack();
+    mainFrame.setLocation(50,50);
+   
+    //画像を並べるためのパネルを作成
     JPanel allImage = new JPanel();
     allImage.setBackground(Color.gray);
-    allImage.setPreferredSize(new Dimension(WIDTH-100, imageHeight));
-//    allImage.setBounds(0, 0, WIDTH, HEIGHT);
+    allImage.setPreferredSize(new Dimension(WIDTH-50, imageHeight));
     
-    //aWindow.add(new JPanel());
+    //パネルに画像を並べていく
+    int x = 20;
+    int y = 20;
     for(ImagePanel panel:imagePanelList){
+      //もしImagePanelがBufferedImageにnullを持っていれば読み込みに失敗しているため、無視する
       if(panel.getImage() !=null){
         panel.setPreferredSize(new Dimension(120, 120));
         allImage.add(panel);
-        //aWindow.add(panel);
         panel.setBounds(x, y, 120, 120);
+        //折り返しの処理
         x+=140;
         if(x>WIDTH-130){
           x=20;
@@ -84,12 +93,15 @@ public class Engine {
         } 
       }
     }
+    
+    //スクロールペインの設定
     JScrollPane scrollpane = new JScrollPane(allImage);
     scrollpane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    aWindow.getContentPane().add(scrollpane);
+    mainFrame.getContentPane().add(scrollpane);
     
-    
-    aWindow.setVisible(true);
+    //メインフレームを可視化する
+    mainFrame.setVisible(true);
+    System.out.println("Done!");
   }
 
 }
