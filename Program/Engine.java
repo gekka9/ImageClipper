@@ -48,7 +48,7 @@ public class Engine {
     }
     System.out.println("test");
     JFrame aWindow;
-    aWindow = new JFrame("test");
+    aWindow = new JFrame("ImageClipper");
     //aWindow.getContentPane().add(aView);
     aWindow.setMinimumSize(new Dimension(400, 300));
     aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
