@@ -1,5 +1,6 @@
 package imageClipper;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -54,27 +55,25 @@ public class Engine {
     aWindow.setSize(WIDTH, HEIGHT);
     aWindow.setLocation(200,200);
     aWindow.setVisible(true);
+    /*
     JPanel mainPanel = new JPanel();
     mainPanel.setBounds(0, 0, WIDTH, HEIGHT);
+    mainPanel.setBackground(Color.black);
     aWindow.add(mainPanel);
-    JScrollPane scrollPane = new JScrollPane();
-    scrollPane.setPreferredSize(new Dimension(400,400));
-    mainPanel.add(scrollPane);
-    JViewport view = scrollPane.getViewport();
+    */
     int x = 20;
     int y=20;
-    
     for(ImagePanel panel:imagePanelList){
+      //mainPanel.add(panel);
+      aWindow.add(panel);
       panel.setBounds(x, y, 120, 120);
-      view.add(panel);
       x+=140;
       if(x>WIDTH-130){
         x=20;
         y+=130;
       }
     }
-    //view.add(new JPanel());
-    scrollPane.setViewport(view);
+    aWindow.add(new JPanel());
     //aWindow.add(scrollPane);
     aWindow.repaint();
   }
