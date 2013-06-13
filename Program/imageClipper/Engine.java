@@ -85,7 +85,7 @@ public class Engine {
     for(File aFile:fileList){
       ArrayList<String> codeList = (ArrayList<String>) ImageFileReader.readCodes(aFile);
       JScrollPane scrollpane = GallaryFactory.createGallary(codeList);
-      this.tabs.add(aFile.getName(),scrollpane);
+      this.tabs.add(aFile.getName().replaceAll(".txt", ""),scrollpane);
     }
     
     //メインフレームにタブを追加する

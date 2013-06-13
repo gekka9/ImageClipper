@@ -23,10 +23,12 @@ public class ClickListener implements MouseListener{
    * コンストラクタ
    */
   ClickListener(String url,BufferedImage image){
+    this.URL=url;
     this.image = image;
   }
   
   ClickListener(String url,BufferedImage image,Boolean doubleClickable){
+    this.URL=url;
     this.image = image;
     this.doubleClickable=doubleClickable;
   }
@@ -65,7 +67,6 @@ public class ClickListener implements MouseListener{
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     StringSelection selection = new StringSelection(this.URL);
     clipboard.setContents(selection, selection);
-    
     //アラートを出す
     //JOptionPane.showMessageDialog(null, "URLをクリップボードにコピーしました。");
    }
