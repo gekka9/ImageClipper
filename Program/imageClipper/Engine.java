@@ -1,11 +1,14 @@
 package imageClipper;
 
 import java.awt.Dimension;
+import java.io.File;
 import java.util.ArrayList;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  * アプリケーションの動作のためのエンジン
@@ -33,10 +36,24 @@ public class Engine {
    * @throws InterruptedException
    */
   private void execute() throws InterruptedException{
+    File codeFile = null;
+    String fileTitle=null;
+    
+    //FileChooserの作成
+    JFileChooser chooser = new JFileChooser();
+    chooser.setFileFilter(new FileNameExtensionFilter("*.txt","txt"));
+    
+    //選択されたファイルの読み取り
+    if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+      codeFile=chooser.getSelectedFile();
+      fileTitle=codeFile.getName();
+      fileTitle=fileTitle.replaceAll(".txt", "");
+    }else{
+      return;
+    }
     //ファイルを読み込んでImagePanelを作らせる
-    ImageFileReader reader = new ImageFileReader();
     System.out.print("Loading codes...");
-    ArrayList<String> codeList=(ArrayList<String>) reader.readCodes();
+    ArrayList<String> codeList=(ArrayList<String>) ImageFileReader.readCodes(codeFile);
     if(codeList == null){
       System.out.println(System.getProperty("line.separator")+"canceled");
       return;
@@ -57,8 +74,8 @@ public class Engine {
     
     JTabbedPane tab = new JTabbedPane(); 
     tab.setBounds(0, 30, WIDTH, HEIGHT);
-    tab.add("1",scrollpane);
-    tab.add("2",scrollpane2);
+    tab.add(fileTitle,scrollpane);
+    tab.add(fileTitle,scrollpane2);
     
     mainFrame.getContentPane().add(tab);
     //メインフレームを可視化する
