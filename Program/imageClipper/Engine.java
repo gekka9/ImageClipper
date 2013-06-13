@@ -1,12 +1,11 @@
 package imageClipper;
 
-import java.awt.Color;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 
 /**
  * アプリケーションの動作のためのエンジン
@@ -34,74 +33,37 @@ public class Engine {
    * @throws InterruptedException
    */
   private void execute() throws InterruptedException{
+    //ファイルを読み込んでImagePanelを作らせる
     ImageFileReader reader = new ImageFileReader();
+    System.out.print("Loading codes...");
     ArrayList<String> codeList=(ArrayList<String>) reader.readCodes();
-    ArrayList<ImagePanel> imagePanelList= new ArrayList<ImagePanel>();
-    for(String code:codeList){
-      ImageFactory factory = new ImageFactory(code,imagePanelList);
-      //imagePanelList.add(factory.createImagePanel());
-      factory.start();
+    if(codeList == null){
+      System.out.println(System.getProperty("line.separator")+"canceled");
+      return;
     }
-    int length=0;
-    while(true){
-     Thread.sleep(100);
-     length=imagePanelList.size();
-     if(length==codeList.size()){
-       System.out.println("break");
-       break;
-     }
-    }
-    int imageHeight = (imagePanelList.size()/4)*130;
-    System.out.println("test");
-    JFrame aWindow;
-    aWindow = new JFrame("ImageClipper");
-    //aWindow.getContentPane().add(aView);
-    aWindow.setMinimumSize(new Dimension(WIDTH, 500));
-    aWindow.setMaximumSize(new Dimension(WIDTH, 600));
-    aWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//    aWindow.setSize(WIDTH, HEIGHT);
-    aWindow.pack();
-    aWindow.setLocation(200,200);
-//    aWindow.setVisible(true);
-   
-//    JPanel mainPanel = new JPanel();
-//    mainPanel.setBounds(0, 0, WIDTH, HEIGHT);
-//    mainPanel.setBackground(Color.black);
-//    aWindow.add(mainPanel);
-   
+    System.out.println("done!");
+    System.out.print("Generating ImagePanel...");
+
+    //メインフレームの作成
+    JFrame mainFrame;
+    mainFrame = new JFrame("ImageClipper");
+    mainFrame.setMinimumSize(new Dimension(WIDTH, 500));
+    mainFrame.setMaximumSize(new Dimension(WIDTH, 600));
+    mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    mainFrame.pack();
+    mainFrame.setLocation(50,50);
+    JScrollPane scrollpane = GallaryFactory.createGallary(codeList);
+    JScrollPane scrollpane2 = GallaryFactory.createGallary(codeList);
     
-    int x = 20;
-    int y=20;
-    JPanel allImage = new JPanel();
-    allImage.setBackground(Color.gray);
-    allImage.setPreferredSize(new Dimension(WIDTH, imageHeight));
-//    allImage.setBounds(0, 0, WIDTH, HEIGHT);
+    JTabbedPane tab = new JTabbedPane(); 
+    tab.setBounds(0, 30, WIDTH, HEIGHT);
+    tab.add("1",scrollpane);
+    tab.add("2",scrollpane2);
     
-    //aWindow.add(new JPanel());
-    for(ImagePanel panel:imagePanelList){
-      if(panel.getImage() !=null){
-        panel.setPreferredSize(new Dimension(120, 120));
-        allImage.add(panel);
-        //aWindow.add(panel);
-        panel.setBounds(x, y, 120, 120);
-        x+=140;
-        if(x>WIDTH-130){
-          x=20;
-          y+=130; 
-        } 
-      }
-//      panel.repaint();
-    }
-    JScrollPane scrollpane = new JScrollPane(allImage);
-    scrollpane.setPreferredSize(new Dimension(WIDTH, HEIGHT));
-    aWindow.getContentPane().add(scrollpane);
-    
-    
-    aWindow.setVisible(true);
-    
-//    mainPanel.add(allImage);
-    //aWindow.add(scrollPane);
-//    aWindow.repaint();
+    mainFrame.getContentPane().add(tab);
+    //メインフレームを可視化する
+    mainFrame.setVisible(true);
+    System.out.println("Done!");
   }
 
 }

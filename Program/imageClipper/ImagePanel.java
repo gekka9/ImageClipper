@@ -7,15 +7,28 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JPanel;
 
+/**
+ * 画像とそのマウスリスナーを持つパネル
+ */
 public class ImagePanel extends JPanel{
-  private static final long serialVersionUID = 1L;
+  
+  /**
+   * 画像を持つフィールド
+   */
   private BufferedImage image =null;
   
+  /**
+   * コンストラクタ
+   */
   ImagePanel(BufferedImage image){
     super();
+    //画像の読み込みに失敗していたらnullを保持する
     if(image == null){
       this.image=null;
     }else{
+      /**
+       * 画像のリサイズを行う
+       */
       AffineTransformOp ato = null;
       int width=120;
       int height = (int)(((double)width /image.getWidth()) * (double)image.getHeight());
@@ -26,18 +39,23 @@ public class ImagePanel extends JPanel{
     }
   }
   
+  /**
+   * 画像を描画する
+   */
   public void paintComponent(Graphics g){
     g.drawImage(this.image, 0, 0, this);
   }
   
   /**
-   * @param args
+   * テスト用クラス。未実装
    */
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
 
   }
   
+  /**
+   * 画像を応答する
+   */
   public BufferedImage getImage(){
     return this.image;
   }

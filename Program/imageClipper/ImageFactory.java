@@ -9,29 +9,45 @@ import javax.imageio.ImageIO;
 
 
 /**
- * コードを1つ受け取り、ImagePanelを生成する。
- *
+ * コードを1つとListを受け取り、ImagePanelのインスタンスを生成し、Listに追加する。
  */
 public class ImageFactory extends Thread{
 
+  /**
+   * コードを保持する
+   */
   private String code=null;
+  
+  /**
+   * 生成したImagePanelを追加するためのListを保持する
+   */
   private List<ImagePanel> list=null;
+  
+  /**
+   * フルサイズの画像を取得するためのURLのコード以前の部分を持つ定数
+   */
   private final String FULL = "http://twitpic.com/show/full/";
+  
+  /**
+   * TwitPicのページのコード以前の部分を持つ定数
+   */
   private final String URL = "http://twitpic.com/";
   
-  ImageFactory(String code){
-    this.code=code;
-  }
+  /**
+   * コンストラクタ
+   */
   ImageFactory(String code,List<ImagePanel> list){
     this.code=code;
     this.list=list;
   }
   
+  /**
+   * ImagePanelのインスタンスを生成し、リストに追加する
+   */
   public void run(){
     java.net.URL url;
     ImagePanel panel=null;
     try {
-      System.out.println(this.URL+code);
       url = new java.net.URL(this.FULL+code);
       ClickListener listener = new ClickListener(this.URL+code);
       BufferedImage image;
@@ -39,19 +55,20 @@ public class ImageFactory extends Thread{
       panel = new ImagePanel(image);
       panel.addMouseListener(listener);
       synchronized (list) {
-      System.out.println(this.list.add(panel));
-      System.out.println("add");
+        this.list.add(panel);
+        //System.out.println(this.list.add(panel));
+        //System.out.println("add");
       }
     } catch (MalformedURLException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
   
-  
+  /**
+   * ImagePanelのインスタンスを作成し、応答する
+   */
   public ImagePanel createImagePanel(){
     java.net.URL url;
     ImagePanel panel=null;
@@ -62,20 +79,17 @@ public class ImageFactory extends Thread{
       image = ImageIO.read(url);
       panel = new ImagePanel(image);
     } catch (MalformedURLException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     return panel;
   }
   
   /**
-   * @param args
+   * テスト用クラス。未実装。
    */
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
 
   }
 

@@ -8,56 +8,65 @@ import java.awt.event.MouseListener;
 
 import javax.swing.JOptionPane;
 
+/**
+ * ImagePanelがクリックされたとき処理を行うクラス
+ *
+ */
 public class ClickListener implements MouseListener{
 
   private String URL=null;
   
+  /**
+   * コンストラクタ
+   */
   ClickListener(String url){
     this.URL = url;
   }
   
   /**
-   * @param args
+   * テスト用メインメソッド<br>
+   * 未実装
    */
   public static void main(String[] args) {
-    // TODO Auto-generated method stub
       
   }
 
-  @Override
+  /**
+   * 画像がクリックされたことを検知し、その画像のURLをクリップボードにコピーする。<br>
+   * 将来的にダブルクリックに何らかの昨日を実装しようと考えているが未実装
+   */
   public void mouseClicked(MouseEvent e) {
-    // TODO Auto-generated method stub
     if (e.getClickCount() >= 2){
-      JOptionPane.showMessageDialog(null, "つぶやきました。");
+      //ダブルクリック時の処理
+      //JOptionPane.showMessageDialog(null, "ダブルクリック");
    }else{
+    //クリップボードにURLをコピーする
     Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
     StringSelection selection = new StringSelection(this.URL);
     clipboard.setContents(selection, selection);
+    
+    //アラートを出す
     //JOptionPane.showMessageDialog(null, "URLをクリップボードにコピーしました。");
    }
   }
 
   @Override
   public void mouseEntered(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void mouseExited(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void mousePressed(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 
   @Override
   public void mouseReleased(MouseEvent arg0) {
-    // TODO Auto-generated method stub
     
   }
 
