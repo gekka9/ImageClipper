@@ -6,8 +6,6 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JOptionPane;
-
 /**
  * ImagePanelがクリックされたとき処理を行うクラス
  *
