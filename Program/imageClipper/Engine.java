@@ -41,30 +41,29 @@ public class Engine {
    * @throws InterruptedException
    */
   private void execute() throws InterruptedException{
-    File codeFile = null;
-    String fileTitle=null;
-    
-    //FileChooserの作成
-    JFileChooser chooser = new JFileChooser();
-    chooser.setFileFilter(new FileNameExtensionFilter("*.txt","txt"));
-    
-    //選択されたファイルの読み取り
-    if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
-      codeFile=chooser.getSelectedFile();
-      fileTitle=codeFile.getName();
-      fileTitle=fileTitle.replaceAll(".txt", "");
-    }else{
-      return;
+    //カレントディレクトリのテキストファイルを読み込んでリストに追加
+    File[] textFiles = new File(".").listFiles();
+    ArrayList<File> fileList=new ArrayList<File>(); 
+    for (File aFile : textFiles){
+      if(aFile.getAbsolutePath().endsWith(".txt")){
+        fileList.add(aFile);
+        System.out.println(aFile.getName());
+      }
     }
-    //ファイルを読み込ませる
-    System.out.print("Loading codes...");
-    ArrayList<String> codeList=(ArrayList<String>) ImageFileReader.readCodes(codeFile);
-    if(codeList == null){
-      System.out.println(System.getProperty("line.separator")+"canceled");
-      return;
+    
+    //もしテキストファイルがなければ、ユーザに選ばせる
+    if(fileList.size()==0){
+      //FileChooserの作成
+      JFileChooser chooser = new JFileChooser();
+      chooser.setFileFilter(new FileNameExtensionFilter("*.txt","txt"));
+      
+      //選択されたファイルの読み取り
+      if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+        fileList.add(chooser.getSelectedFile());
+      }else{
+        return;
+      }
     }
-    System.out.println("done!");
-    System.out.print("Generating ImagePanel...");
 
     //メインフレームの作成
     this.mainFrame = new JFrame("ImageClipper");
@@ -76,16 +75,18 @@ public class Engine {
     DnDListener listener = new DnDListener(this);
     new DropTarget(this.mainFrame, listener);
     
-    //スクロールペインを作らせ、リストに追加する
     this.scrollPaneList = new ArrayList<JScrollPane>();
-    JScrollPane scrollpane = GallaryFactory.createGallary(codeList);
-    this.scrollPaneList.add(scrollpane);
     
-    //タブを作成し、スクロールペインを追加する
+    //タブを作成しする
     this.tabs = new JTabbedPane(); 
     this.tabs.setBounds(0, 0, WIDTH, HEIGHT);
-    this.tabs.add(fileTitle,scrollpane);
-    //tab.add(fileTitle,scrollpane2);
+    
+    //ファイルのリストからスクロールペインを生成し、タブに追加
+    for(File aFile:fileList){
+      ArrayList<String> codeList = (ArrayList<String>) ImageFileReader.readCodes(aFile);
+      JScrollPane scrollpane = GallaryFactory.createGallary(codeList);
+      this.tabs.add(aFile.getName(),scrollpane);
+    }
     
     //メインフレームにタブを追加する
     this.mainFrame.getContentPane().add(tabs);
