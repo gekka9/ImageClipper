@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JPanel;
 
 /**
- * 画像とそのマウスリスナーを持つパネル
+ * 画像を持つパネル
  */
 public class ImagePanel extends JPanel{
   
@@ -20,7 +20,7 @@ public class ImagePanel extends JPanel{
   /**
    * コンストラクタ
    */
-  ImagePanel(BufferedImage image){
+  ImagePanel(BufferedImage image, int width){
     super();
     //画像の読み込みに失敗していたらnullを保持する
     if(image == null){
@@ -30,7 +30,6 @@ public class ImagePanel extends JPanel{
        * 画像のリサイズを行う
        */
       AffineTransformOp ato = null;
-      int width=120;
       int height = (int)(((double)width /image.getWidth()) * (double)image.getHeight());
       BufferedImage distImage = new BufferedImage(width, height, image.getType());
       ato = new AffineTransformOp(AffineTransform.getScaleInstance((double)width / image.getWidth(),(double) height / image.getHeight()),null);

@@ -49,10 +49,10 @@ public class ImageFactory extends Thread{
     ImagePanel panel=null;
     try {
       url = new java.net.URL(this.FULL+code);
-      ClickListener listener = new ClickListener(this.URL+code);
       BufferedImage image;
       image = ImageIO.read(url);
-      panel = new ImagePanel(image);
+      ClickListener listener = new ClickListener(this.URL+code,image);
+      panel = new ImagePanel(image,120);
       panel.addMouseListener(listener);
       synchronized (list) {
         this.list.add(panel);
@@ -77,7 +77,7 @@ public class ImageFactory extends Thread{
       url = new java.net.URL(this.URL+code);
       BufferedImage image;
       image = ImageIO.read(url);
-      panel = new ImagePanel(image);
+      panel = new ImagePanel(image,120);
     } catch (MalformedURLException e) {
       e.printStackTrace();
     }catch (IOException e) {
