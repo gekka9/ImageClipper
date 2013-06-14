@@ -2,6 +2,8 @@ package imageClipper;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFileChooser;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -11,6 +13,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 public class Model {
   static final int WIDTH=600;
   static final int HEIGHT=800;
+  private List<File> fileList;
   
   /**
    * 同じディレクトリにある.txtファイルを読み込み、ビューを生成する
@@ -20,7 +23,7 @@ public class Model {
     System.out.println("model");
     //カレントディレクトリのテキストファイルを読み込んでリストに追加
     File[] textFiles = new File(".").listFiles();
-    ArrayList<File> fileList=new ArrayList<File>(); 
+    this.fileList=new ArrayList<File>(); 
     for (File aFile : textFiles){
       if(aFile.getAbsolutePath().endsWith(".txt")){
         fileList.add(aFile);
@@ -41,6 +44,10 @@ public class Model {
         return;
       }
     }
-    View view = new View(fileList);
+    View view = new View(this);
+  }
+  
+  public List<File> getFileList(){
+    return this.fileList;
   }
 }

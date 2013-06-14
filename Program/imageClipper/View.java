@@ -17,12 +17,16 @@ import javax.swing.JTabbedPane;
 public class View extends JFrame{
   private ArrayList<JScrollPane> scrollPaneList;
   private JTabbedPane tabs;
+  private Model model;
+  private List<File> fileList;
   
   /**
    * コンストラクタ
    */
-  View(List<File> fileList){
+  View(Model model){
     super();
+    this.model=model;
+    this.fileList=model.getFileList();
     //メインフレームの作成
     this.setMinimumSize(new Dimension(Model.WIDTH, 500));
     this.setMaximumSize(new Dimension(Model.WIDTH, 600));
@@ -39,7 +43,7 @@ public class View extends JFrame{
     this.tabs.setBounds(0, 0, Model.WIDTH, Model.HEIGHT);
     
     //ファイルのリストからスクロールペインを生成し、タブに追加
-    for(File aFile:fileList){
+    for(File aFile:this.fileList){
       ArrayList<String> codeList = (ArrayList<String>) ImageFileReader.readCodes(aFile);
       JScrollPane scrollpane = GallaryFactory.createGallary(codeList);
       this.tabs.add(aFile.getName().replaceAll(".txt", ""),scrollpane);
