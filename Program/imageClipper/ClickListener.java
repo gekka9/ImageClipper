@@ -57,7 +57,6 @@ public class ClickListener implements MouseListener{
       //mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
       mainFrame.pack();
       mainFrame.setLocation(100,100);
-      
       mainFrame.add(panel);
       panel.setBounds(0,0,400,height);
       mainFrame.setVisible(true);

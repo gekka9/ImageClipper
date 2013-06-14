@@ -16,13 +16,7 @@ import javax.swing.JScrollPane;
 public class GallaryFactory {
   static final int WIDTH=600;
   static final int HEIGHT=800;
-  /**
-   * @param args
-   */
-  public static void main(String[] args) {
-    // TODO Auto-generated method stub
-
-  }
+  
   /**
    * コードのリストを受け取り、ImagePanelの集合からJScrollPaneを生成し、応答する
    */
@@ -52,7 +46,7 @@ public class GallaryFactory {
     System.out.println("Done!");
     System.out.print("Showing Images...");
     //画像表示に必要な高さを得る
-    int imageHeight = (imagePanelList.size()/4)*160;
+    int imageHeight = (int) (Math.ceil(imagePanelList.size()/4)*130);
     
     //画像を並べるためのパネルを作成
     JPanel allImage = new JPanel();

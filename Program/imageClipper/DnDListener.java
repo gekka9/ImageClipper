@@ -18,12 +18,18 @@ import java.util.List;
  * テキストファイルのドラッグアンドドロップを検知するクラス。
  */
 public class DnDListener implements DropTargetListener, MouseListener {
-  private Engine engine;
+  private View view;
   /**
    * コンストラクタ
    */
+  /*
   DnDListener(Engine engine){
     this.engine=engine;
+  }
+  */
+  
+  DnDListener(View view){
+    this.view=view;
   }
   
   /**
@@ -40,7 +46,7 @@ public class DnDListener implements DropTargetListener, MouseListener {
             if(fileList.size() == 1 && (fileList.get(0).getAbsolutePath().endsWith(".txt"))) {
               dtde.dropComplete(true);
               File codeFile = fileList.get(0);
-              engine.addScrollPane(codeFile.getName().replaceAll(".txt", ""),GallaryFactory.createGallary(ImageFileReader.readCodes(codeFile)));
+              this.view.addScrollPane(codeFile.getName().replaceAll(".txt", ""),GallaryFactory.createGallary(ImageFileReader.readCodes(codeFile)));
             } else {
               dtde.dropComplete(false);
             }
