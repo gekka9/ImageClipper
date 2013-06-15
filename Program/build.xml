@@ -5,7 +5,7 @@
          default : make とだけ入力されたときに実行するタスク名の指定
          basedir : 相対パスに用いる dir をこのファイル（build.xml）がある dir に指定
 -->
-<project name="Fourier" default="all" basedir=".">
+<project name="imageClipper" default="all" basedir=".">
 
     <!-- これ以降の処理で使用する文字列を定数として定義 -->
     <property name="package" value="imageClipper" />
@@ -116,30 +116,7 @@
         
         <echo> on ${Date} at ${Time} </echo> <!-- タイムスタンプを表示 -->
     </target>
-    
-    <!-- インストール。all に依存(all 後に実行) -->
-    <target name="install" depends="all" description="install into application">
         
-        <!-- インストールするディレクトリに jarファイル をコピー。 -->
-        <copy file="${package}.jar" todir="${instdir}" />
-        
-        <!-- 
-            ファイルとディレクトリへのアクセス権を 755 に設定
-            •その所有者は読み出しおよび書き込み、実行が可能。
-            •そのグループとその他ユーザーは読み出しおよび実行が可能。
-         -->
-        <exec executable="chmod">
-            <arg line="755 ${instdir}/../../MacOS/applet" />
-        </exec>
-        
-        <!-- サンプル画像をコピー -->
-        <copy todir="${instdir}/SampleImages">
-            <fileset dir="SampleImages" includes="*.jpg" />
-        </copy>
-        
-        <echo> on ${Date} at ${Time} </echo> <!-- タイムスタンプを表示 -->
-    </target>
-    
     <!-- Javadoc。all に依存(all 後に実行) -->
     <target name="doc" depends="all" description="make document (Javadoc)">
         <mkdir dir="${docdir}" />
