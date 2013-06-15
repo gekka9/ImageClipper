@@ -12,7 +12,6 @@
     <property name="packagenames" value="${package}" />
     <property name="destdir" value="./Classes" />
     <property name="docdir" value="./JavaDoc" />
-    <property name="instdir" value="./${ant.project.name}.app/Contents/Resources/Java" />
     <property name="copyright" value="Copyright 2012 KISHIDA TATSUYOSHI." />
     <property name="zipname" value="${ant.project.name}" />
     
