@@ -95,7 +95,6 @@
         <!-- 指定したファイル or ディレクトリを削除 -->
         <delete dir="${destdir}" />
         <delete file="${package}.jar" />
-        <delete dir="${instdir}" />
         <delete dir="${docdir}" />
         <delete file="../${zipname}.zip" />
         <delete>
