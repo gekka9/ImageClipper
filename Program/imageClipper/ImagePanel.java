@@ -47,7 +47,6 @@ public class ImagePanel extends JPanel{
       ato.filter(image, distImage);
       this.image=distImage;
         this.setFile();
-//        System.out.println("ok");
         this.setTransferHandler(new TransferHandler() {
             @Override public int getSourceActions(JComponent c) {
                 return COPY_OR_MOVE;
@@ -65,14 +64,12 @@ public class ImagePanel extends JPanel{
             }
             private void cleanup(JComponent c, boolean removeFile) {
                 if(removeFile) {
-//                    clearFile();
                     c.repaint();
                 }
             }
         });
         this.addMouseListener(new MouseAdapter() {
             @Override public void mousePressed(MouseEvent e) {
-                //                System.out.println(e);
                 JComponent c = (JComponent)e.getSource();
                 c.getTransferHandler().exportAsDrag(c, e, TransferHandler.COPY);
             }
@@ -88,23 +85,12 @@ public class ImagePanel extends JPanel{
     private void setFile() {
         try{
             this.file = File.createTempFile("image",".jpg");
-//            System.out.println(tmp.getAbsolutePath());
-//            this.file = new File(tmp.getParent()+"/test.txt");
-//            tmp.delete();
-//            System.out.println(this.file.getAbsolutePath());
             this.file.deleteOnExit();
-            //          File file = new File("c:¥¥tmp¥¥test.txt");
-//            FileWriter filewriter = new FileWriter(this.file);
             ImageIO.write(this.image, "jpeg", this.file);
-            
-//            filewriter.write("Hello World");
-//            filewriter.close();
+  
         }catch(IOException e){
             System.out.println(e);
         }
-        System.out.println(this.file);
-        //        label.setIcon(i2);
-//        label.setText("tmpfile#exists(): true(draggable)");
     }
 
   /**
