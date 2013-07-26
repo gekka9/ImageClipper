@@ -25,9 +25,11 @@ public class Model {
     File[] textFiles = new File(".").listFiles();
     this.fileList=new ArrayList<File>(); 
     for (File aFile : textFiles){
-      if(aFile.getAbsolutePath().endsWith(".txt")){
-        fileList.add(aFile);
-        System.out.println(aFile.getName());
+      if(aFile.getAbsolutePath().endsWith(".dat") ){
+        if(ImageFileReader.check(aFile)){
+          fileList.add(aFile);
+          System.out.println(aFile.getName());
+        }
       }
     }
     
@@ -35,13 +37,14 @@ public class Model {
     if(fileList.size()==0){
       //FileChooserの作成
       JFileChooser chooser = new JFileChooser();
-      chooser.setFileFilter(new FileNameExtensionFilter("*.txt","txt"));
+      chooser.setFileFilter(new FileNameExtensionFilter("*.dat","dat"));
       
       //選択されたファイルの読み取り
       if(chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
         fileList.add(chooser.getSelectedFile());
       }else{
-        return;
+        System.out.println("ファイル選択がキャンセルされました。終了します。");
+        System.exit(1);
       }
     }
     View view = new View(this);

@@ -35,7 +35,7 @@ public class View extends JFrame{
     this.setLocation(50,50);
     DnDListener listener = new DnDListener(this);
     new DropTarget(this, listener);
-    
+    this.setVisible(true);
     this.scrollPaneList = new ArrayList<JScrollPane>();
     
     //タブを作成する
@@ -46,13 +46,13 @@ public class View extends JFrame{
     for(File aFile:this.fileList){
       ArrayList<String> codeList = (ArrayList<String>) ImageFileReader.readCodes(aFile);
       JScrollPane scrollpane = GallaryFactory.createGallary(codeList);
-      this.tabs.add(aFile.getName().replaceAll(".txt", ""),scrollpane);
+      this.tabs.add(aFile.getName().replaceAll(".dat", ""),scrollpane);
     }
     
     //メインフレームにタブを追加する
     this.getContentPane().add(tabs);
     //メインフレームを可視化する
-    this.setVisible(true);
+    this.repaint();
     System.out.println("Done!");
   }
   

@@ -31,16 +31,16 @@ public class GallaryFactory {
     //ImagePanelの生成スレッドがすべて終了したら先に進む
     int length=0;
     while(true){
-     try {
-      Thread.sleep(100);
-    } catch (InterruptedException e) {
-      // TODO Auto-generated catch block
-      e.printStackTrace();
-    }
-     length=imagePanelList.size();
-     if(length==codeList.size()){
-       break;
-     }
+      try {
+        Thread.sleep(100);
+      } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+      }
+      length=imagePanelList.size();
+      if(length==codeList.size()){
+        break;
+      }
     }
 
     System.out.println("Done!");
